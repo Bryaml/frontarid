@@ -1,0 +1,146 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+   
+    font-family: Arial, Helvetica, sans-serif;
+    background: #E6E6E6;
+}
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-body {
+    width: 400px;
+    min-width: 300px;
+    border-radius: 10px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: solid 1px #088A68;
+    margin: 10px;
+    background-color: white;
+}
+
+.form-body img {
+    width: 150px;
+    display: block;
+    margin: 20px auto;
+}
+
+.text {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color:black;
+    margin-bottom: 25px;
+}
+
+.form-body input {
+    display: block;
+    margin: auto;
+    height: 40px;
+    width: 75%;
+    padding-left: 10px;
+    color: black;
+    border: 1px solid #088A68;
+    border-radius: 2px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: transparent;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.form-body input[type="password"] {
+    margin-top: 20px;
+}
+
+::placeholder {
+    font-size: 1rem;
+    color: black;
+}
+
+.form-body input:hover {
+    transition: .5s;
+    border: 1px solid #2980b9;
+    color: #2498db;
+}
+
+.form-body button {
+    display: block;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    height: 40px;
+    width: 78%;
+    background: #088A68 ;
+    color:white;
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+    border: 2px solid #088A68;
+    transition:  all .5s ease;
+
+}
+
+.form-body button:hover {
+    color: #d5dbdd;
+    border: 2px solid  #088A68;
+    background:linear-gradient(#34495e,#2c3e50);
+}
+
+.form-body a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color:  #0B0B61;
+
+    margin-left: 120px;
+    margin-top: 50px;
+}
+
+.row g-3{
+    width: 400px;
+    min-width: 300px;
+    border-radius: 10px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: solid 1px #088A68;
+    margin: 10px;
+    background-color: white;
+}
+
+.container{
+    background-color: white;
+}
+
+.btn{
+    display: block;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    height: 40px;
+    width: 50%;
+    background: #0B0B61 ;
+    color:white;
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+    border: 2px solid #0B0B61;
+    transition:  all .5s ease;
+}
+
+
+h5{
+    background-color: #0B0B61;
+    color: white;
+    text-align: center;
+}
