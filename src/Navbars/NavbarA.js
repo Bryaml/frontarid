@@ -68,6 +68,18 @@ const NavbarA = ({user, handleShowUserModal, handleShowAulaLabModal }) => {
             info personal
           </a>
         </li>
+        <li>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/informes', { replace: true, state: { user: user } });
+            }}
+          >
+            graficas
+          </a>
+        </li>
+
 
         <li>
           <a

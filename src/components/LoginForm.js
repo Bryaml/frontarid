@@ -23,7 +23,7 @@ const LoginForm = () => {
 
     try {
       const user = await AuthService.login(email, password);
-      setCurrentUser(user); // Update user in the context
+      setCurrentUser(user); 
       console.log(user);
 
       if (user.roles === 'docente') {

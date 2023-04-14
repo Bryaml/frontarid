@@ -12,6 +12,7 @@ import InfoD from './pages/InfoD';
 import ChatD from './pages/Chat';
 import ChatT from './pages/ChT';
 import WdwT from './pages/WdwT';
+import { Informes } from './graficas/Informes';
 const AppRoutes = () => {
     const userContext = React.useContext(UserContext);
   
@@ -26,6 +27,8 @@ const AppRoutes = () => {
         <Route path="/usuario" element={userContext.currentUser ? <Usuario /> : <Navigate to="/" />} />
         <Route path="/chatD" element={userContext.currentUser ? <ChatD /> : <Navigate to="/" />} />
         <Route path="/chatT" element={userContext.currentUser ? <ChatT /> : <Navigate to="/" />} />
+        <Route path="/informes" element={userContext.currentUser ? <Informes /> : <Navigate to="/" />} />
+       
       </Routes>
     );
   };

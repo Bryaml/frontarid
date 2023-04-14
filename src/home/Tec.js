@@ -37,7 +37,6 @@ const TecnicoDashboard = () => {
         return;
       }
     } else {
-      // Actualiza la incidencia en el servidor
       try {
         await api.put(`/incidencias/${updatedIncidencia.id}`, updatedIncidencia);
       } catch (error) {
@@ -45,7 +44,6 @@ const TecnicoDashboard = () => {
         return;
       }
     }
-  
     // Agrega la incidencia actualizada al estado
     setIncidencias((prevIncidencias) => [...prevIncidencias, updatedIncidencia]);
   };

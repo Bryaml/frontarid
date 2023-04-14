@@ -27,7 +27,8 @@ const Do = () => {
         const response = await api.get('/incidencias/docente', {
           params: { emailDocente: correoDocente },
         });
-
+  
+        console.log('Datos recibidos:', response.data);// Mueve esta línea aquí para asegurarte de que response está inicializado.
         setIncidencias(response.data);
       } catch (error) {
         console.error('Error al obtener las incidencias:', error);
@@ -35,6 +36,7 @@ const Do = () => {
     };
     fetchIncidencias();
   }, []);
+  
 
   const pendientes = incidencias.filter(
     (incidencia) => incidencia.estado === 'PENDIENTE'
@@ -86,3 +88,5 @@ const Do = () => {
 };
 
 export default Do;
+
+

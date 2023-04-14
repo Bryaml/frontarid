@@ -13,6 +13,15 @@ async function assignTechnicianToIncidencia(incidenciaId, emailTecnico) {
     throw error;
   }
 }
-
+async function adminAcceptIncidencia(incidenciaId, emailAdmin) {
+  try {
+    const response = await api.post(`/incidencias/admin/aceptar-incidencia?id=${incidenciaId}&emailAdmin=${emailAdmin}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error al aceptar la incidencia por el administrador:', error.response);
+    throw error;
+  }
+}
 export default api;
 export { assignTechnicianToIncidencia };
+export { adminAcceptIncidencia };
