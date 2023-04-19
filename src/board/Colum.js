@@ -2,7 +2,7 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 import Card from './Card';
 
-const Column = ({ title, incidencias, onDrop }) => {
+const Column = ({ title, incidencias, onDrop, handleShowChatModal }) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: 'card',
     drop: (item) => {
@@ -12,7 +12,7 @@ const Column = ({ title, incidencias, onDrop }) => {
       isOver: monitor.isOver(),
     }),
   }));
-  console.log("Incidencias en columna:", title, incidencias);
+
 
   return (
     <div
@@ -28,7 +28,7 @@ const Column = ({ title, incidencias, onDrop }) => {
     >
       <h3>{title}</h3>
       {incidencias.map((incidencia, index) => (
-        <Card key={incidencia.id} incidencia={incidencia} index={index} />
+        <Card key={index} incidencia={incidencia} index={index} handleShowChatModal={handleShowChatModal} />
       ))}
     </div>
   );

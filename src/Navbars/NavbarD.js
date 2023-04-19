@@ -28,31 +28,7 @@ const NavbarD = ({user,  handleShowUserModal, handleShowAulaLabModal }) => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    if (!currentUser) {
-      return;
-    }
 
-    const socket = new SockJS('http://localhost:8080/ws');
-    const stompClient = Stomp.over(() => socket);
-
-    const connectedCallback = (frame) => {
-      console.log("Connected to notifications: " + frame);
-      console.log("User email: " + currentUser.email);
-    
-      stompClient.subscribe(`/topic/notifications`, (notification) => {
-        console.log("Notificación recibida");
-
-        // Aquí asumimos que el texto de la notificación se encuentra en la propiedad 'body' del objeto 'notification'
-        setNotificationText(notification.body);
-      });
-    };
-    
-    stompClient.connect({}, connectedCallback);
-    return () => {
-      stompClient.disconnect();
-    };
-  }, [currentUser]);
 
   return (
     <nav>
@@ -113,14 +89,7 @@ const NavbarD = ({user,  handleShowUserModal, handleShowAulaLabModal }) => {
             Cerrar sesión
           </a>
         </li>
-        <li>
-      <div className="notification-container">
-        <i className="fas fa-globe"></i>
-        {notificationText && (
-          <span className="notification-text">{notificationText}</span>
-        )}
-      </div>
-    </li>
+   
       </ul>
     </nav>
   );

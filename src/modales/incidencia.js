@@ -81,7 +81,7 @@ const Incidencia = ({ handleClose }) => {
   
       handleClose();
     } catch (error) {
-      toast.error("Error " + error.response.data);
+      toast.error("Error al crear" );
       console.error('Error al crear la incidencia:', error.response.data);
   
       console.error('Error al crear la incidencia:', error);

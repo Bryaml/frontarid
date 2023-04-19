@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import NavbarA from '../Navbars/NavbarA';
-
+import '../assets/css/style.css';
 import { Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import api from '../services/api';
-
+import UserContext from '../services/UserContext';
 const InfoD = () => {
   const location = useLocation();
   const user = location.state.user;
@@ -16,10 +16,12 @@ const InfoD = () => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const [formData, setFormData] = useState({
-    nombre: user.nombre,
+    username: user.username,
     apellidos: user.apellidos,
     email: user.email,
-    // ... otros campos ...
+    roles: user.roles,
+    telefono: user.telefono
+   
   });
   // En el componente InfoD
   const handleImageChange = async (e) => {
@@ -27,10 +29,7 @@ const InfoD = () => {
 
     if (file) {
       try {
-        // Llama a la función para enviar el archivo al servidor
         await uploadImage(user.id, file);
-
-        // Leer el archivo como base64 y actualizar el estado imageUrl
         const reader = new FileReader();
         reader.onload = (e) => {
           setImageUrl(e.target.result);
@@ -39,7 +38,7 @@ const InfoD = () => {
 
       } catch (error) {
         console.error("Error al cargar la imagen:", error);
-        // Puedes agregar lógica adicional aquí, como mostrar un mensaje de error
+        
       }
     }
   };
@@ -70,17 +69,12 @@ const InfoD = () => {
     }
   }, [user.id, imageUrl]);
 
-  // ...
-
   <img
     src={imageUrl}
     alt="Admin"
     className="rounded-circle"
     width="150"
   />
-
-
-
 
   async function uploadImage(userId, file) {
     const formData = new FormData();
@@ -102,20 +96,32 @@ const InfoD = () => {
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    console.log(formData);
   };
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!formData.username) {
+      alert('El campo Nombre no puede estar vacío');
+      return;
+    }
+    if (parseInt(formData.telefono) < -2147483648 || parseInt(formData.telefono) > 2147483647) {
+      alert('El valor del campo Teléfono está fuera del rango permitido');
+      return;
+    }
+    console.log("Datos enviados:", formData);
     try {
       const response = await api.put(
         `/api/administradores/${user.id}`,
         formData
       );
       if (response.status === 200) {
-        // Actualizar la información del usuario
-        user.nombre = formData.nombre;
+       
+        user.username = formData.username;
         user.apellidos = formData.apellidos;
         user.email = formData.email;
-        // ... otros campos ...
+        user.roles = formData.roles;
+        user.telefono = formData.telefono;
         alert('Información actualizada correctamente');
         handleCloseModal();
       } else {
@@ -131,11 +137,11 @@ const InfoD = () => {
   return (
     <>
       <NavbarA user={user} />
-
+ <br></br>
       <div className="container">
         <div className="row">
           <div className="col-12">
-            {/* Aquí puedes agregar el contenido de 'card-header' si lo necesitas. */}
+        
             <div className="card-header" style={{ backgroundColor: "#03A693", color: "white" }}>
               <div className="d-flex justify-content-between bd-highlight">
                 <div className="bd-highlight"></div>
@@ -146,7 +152,7 @@ const InfoD = () => {
               </div>
             </div>
             <div className="card">
-              {/* Aquí puedes agregar el contenido de 'container' si lo necesitas. */}
+      
               <div className="container">
                 <div className="main-body">
                   <div className="row gutters-sm">
@@ -156,17 +162,17 @@ const InfoD = () => {
                           <div className="d-flex flex-column align-items-center text-center">
                             <img
                               src={imageUrl || "https://bootdey.com/img/Content/avatar/avatar7.png"}
-                              alt="Admin"
+                              alt=""
                               className="rounded-circle"
                               width="150"
                             />
                             <div className="mt-3">
                               <h4>scx</h4>
                               <p className="text-secondary mb-1">
-                                Full Stack Developer
+                            
                               </p>
                               <p className="text-muted font-size-sm">
-                                Bay Area, San Francisco, CA
+                               
                               </p>
                               <label htmlFor="image-upload" style={{ cursor: "pointer" }}>
                                 <FontAwesomeIcon icon={faCamera} size="2x" />
@@ -219,7 +225,7 @@ const InfoD = () => {
                               <h6 className="mb-0">Rol</h6>
                             </div>
                             <div className="col-sm-9 text-secondary">
-                              {user.rol}
+                            {user.roles}
                             </div>
                           </div>
                           <hr />
@@ -246,33 +252,38 @@ const InfoD = () => {
       </div>
 
 
-      {/* Modal para actualizar información */}
+
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Modificar información personal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit}>
-            {/* Agrega aquí los campos del formulario */}
+      
             <div className="form-group">
-              <label htmlFor="nombre">Nombre:</label>
-              <input type="text" id="nombre" name="nombre" />
+              <label htmlFor="username">Nombre:</label>
+              <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} />
             </div>
             <div className="form-group">
               <label htmlFor="apellidos">Apellidos:</label>
-              <input type="text" id="apellidos" name="apellidos" />
+              <input type="text" id="apellidos" name="apellidos" value={formData.apellidos} onChange={handleChange} />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" />
+              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
             </div>
-            {/* ... otros campos ... */}
+            <div className="form-group">
+              <label htmlFor="rol">rol:</label>
+              <input type="text" id="roles" name="roles" value={formData.roles} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="telefono">telefono</label>
+              <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
+            </div>
             <button type="submit">Guardar cambios</button>
           </form>
         </Modal.Body>
       </Modal>
-
-
     </>
   );
 };

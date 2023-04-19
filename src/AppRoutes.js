@@ -9,7 +9,7 @@ import Tec from './home/Tec';
 import UserContext from './services/UserContext';
 import Usuario from './modales/usuario';
 import InfoD from './pages/InfoD';
-import ChatD from './pages/Chat';
+import ChatD from './pages/ChatD';
 import ChatT from './pages/ChT';
 import WdwT from './pages/WdwT';
 import { Informes } from './graficas/Informes';

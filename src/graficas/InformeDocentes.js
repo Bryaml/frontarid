@@ -3,7 +3,7 @@ import { PieChart } from '../graficas/PieChart';
 import { Chart } from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
 import axios from 'axios';
-
+import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
 import * as XLSX from "xlsx";
 

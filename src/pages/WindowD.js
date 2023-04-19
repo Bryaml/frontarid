@@ -47,7 +47,7 @@ const WindowD = ({ docente, tecnico, onClose }) => {
   const fetchMessages = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/conversations/${docente.id}/${tecnico.id}`
+        `http://localhost:8080/api/conversations/${docente.id}/${tecnico.id}` 
       );
 
       if (!response.ok) {

@@ -6,6 +6,7 @@ import { Data } from '../graficas/Data';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import * as XLSX from "xlsx";
+import autoTable from 'jspdf-autotable'
 
 Chart.register(CategoryScale);
 
